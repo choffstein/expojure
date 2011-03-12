@@ -8,10 +8,13 @@
   (let [df (new SimpleDateFormat "yyy-MM-dd'T'HH:mmZ")]
     (. (. df format (new Date)) toString)))
 
-(defn stack-trace [e]
+(defn stack-trace-as-str [e]
    (let [sw (new java.io.StringWriter)
 	pw (new java.io.PrintWriter sw true)
 	_ (. e printStackTrace pw) ; side-effect puts stack trace in pw
 	_ (. pw flush)
 	_ (. sw flush)]
      (. sw toString)))
+
+(defn stack-trace-as-vec [e]
+  (reduce #(cons (. %2 toString) %1) [] (. e getStackTrace)))

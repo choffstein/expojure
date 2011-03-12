@@ -3,5 +3,5 @@
  (:gen-class))
 
 (defn print-dispatch [e]
-    (println (expojure.util/stack-trace e)))
+    (println (expojure.util/stack-trace-as-str e)))
 
