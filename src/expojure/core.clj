@@ -12,4 +12,4 @@
 			       `(catch ~e-class ~e-name (do ~@dispatched-methods ~@e-ret)))
 			    catch-clauses)
 	finally-clause (filter (comp #{'finally} first) arglist)]
-  `(try ~execute-clause ~@new-catch-clauses ~@finally-clause)))
+    `(try ~execute-clause ~@new-catch-clauses ~@finally-clause)))

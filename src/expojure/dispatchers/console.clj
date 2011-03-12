@@ -1,6 +1,7 @@
-(ns.dispatchers.console
+(ns expojure.dispatchers.console
+ (:use expojure.util)
  (:gen-class))
 
 (defn print-dispatch [e]
-  (println (. e toString)))
+    (println (expojure.util/stack-trace e)))
 
