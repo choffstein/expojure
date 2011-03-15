@@ -7,7 +7,7 @@
 
 (def #^{:private true} *api-key* "06dc5bf6733efb97e2ee55c3edc05fcc6a3dbcc3")
 
-(defn- body-to-string [resp]
+(defn- body-to-bytes [resp]
   (let [body-stream (:body resp)
 	bytes-available (. body-stream available)
 	bytes (byte-array bytes-available)
@@ -31,7 +31,7 @@
     (json-str body)))
 
 (defn exceptional-dispatch [e]
-  (let [req (body-to-string (gzip/gzipped-response
+  (let [req (body-to-bytes (gzip/gzipped-response
 			     {:body (to-json e)
 			      :headers {"Content-Type" "application/json"
 					"Accept" "application/json"
