@@ -5,16 +5,16 @@
 	    [ring.middleware.gzip :as gzip])
   (:gen-class))
 
-(def *api-key* "06dc5bf6733efb97e2ee55c3edc05fcc6a3dbcc3")
+(def #^{:private true} *api-key* "06dc5bf6733efb97e2ee55c3edc05fcc6a3dbcc3")
 
-(defn body-to-string [resp]
+(defn- body-to-string [resp]
   (let [body-stream (:body resp)
 	bytes-available (. body-stream available)
 	bytes (byte-array bytes-available)
 	_ (. body-stream read bytes 0 bytes-available)]
     (assoc resp :body bytes)))
 
-(defn to-json [e]
+(defn- to-json [e]
   (let [occurred-at (current-time)
 	message (. e getMessage)
 	class (.. e getClass toString)

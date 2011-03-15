@@ -6,7 +6,10 @@
 ; these macros
 
 (defmacro local-try [dispatchers execute-clause & arglist]
-  (let [catch-clauses (filter (comp #{'catch} first) arglist)
+  (let [given-catch-clauses (filter (comp #{'catch} first) arglist)
+	catch-clauses (if (empty? given-catch-clauses)
+			 (cons '(catch Exception e ()) given-catch-clauses)
+			 given-catch-clauses)
 	new-catch-clauses (map
 			   #(let [[_ e-class e-name & e-ret ] %
 				  dispatched-methods (map (fn [d] `(~d ~e-name))
