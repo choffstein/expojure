@@ -39,5 +39,5 @@
 					"Accept" "application/json"
 					"User-Agent" "expojure/1.0.0-SNAPSHOT"}}))]
     (client/post
-     (str "http://api.getexceptional.com/api/errors?api_key=" api-key "&protocol_version=6")
+     (str "http://api.getexceptional.com/api/errors?api_key=" @api-key "&protocol_version=6")
      req)))
