@@ -6,15 +6,15 @@
 
 (defn current-time []
   (let [df (new SimpleDateFormat "yyy-MM-dd'T'HH:mmZ")]
-    (. (. df format (new Date)) toString)))
+    (.toString (.format df (new Date)))))
 
 (defn stack-trace-as-str [e]
    (let [sw (new java.io.StringWriter)
 	pw (new java.io.PrintWriter sw true)
-	_ (. e printStackTrace pw) ; side-effect puts stack trace in pw
-	_ (. pw flush)
-	_ (. sw flush)]
-     (. sw toString)))
+	_ (.printStackTrace e pw) ; side-effect puts stack trace in pw
+	_ (.flush pw)
+	_ (.flush sw )]
+     (.toString sw)))
 
 (defn stack-trace-as-vec [e]
-  (reduce #(cons (. %2 toString) %1) [] (. e getStackTrace)))
+  (reduce #(cons (.toString %2) %1) [] (.getStackTrace e)))

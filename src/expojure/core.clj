@@ -20,5 +20,5 @@
     `(try ~execute-clause ~@new-catch-clauses ~@finally-clause)))
 
 (defmacro global-try [& arglist]
-  (let [derefed @dispatch/*dispatchers*]
+  (let [derefed @dispatch/dispatchers]
     `(local-try ~derefed ~@arglist)))

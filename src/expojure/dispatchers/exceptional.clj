@@ -5,19 +5,21 @@
 	    [ring.middleware.gzip :as gzip])
   (:gen-class))
 
-(def #^{:private true} *api-key* "06dc5bf6733efb97e2ee55c3edc05fcc6a3dbcc3")
+(def api-key (ref ""))
+(def set-api-key [key]
+  (dosync (ref-set api-key key)))
 
 (defn- body-to-bytes [resp]
   (let [body-stream (:body resp)
-	bytes-available (. body-stream available)
+	bytes-available (.available body-stream)
 	bytes (byte-array bytes-available)
-	_ (. body-stream read bytes 0 bytes-available)]
+	_ (.read bytes body-stream 0 bytes-available)]
     (assoc resp :body bytes)))
 
 (defn- to-json [e]
   (let [occurred-at (current-time)
-	message (. e getMessage)
-	class (.. e getClass toString)
+	message (.getMessage e )
+	class (.toString (.getClass e))
 	stack-trace (stack-trace-as-vec e)
 	body {"application_environment" {"application_root_directory" ""
 					 "env" {}}
