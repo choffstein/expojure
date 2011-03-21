@@ -6,7 +6,7 @@
   (:gen-class))
 
 (def api-key (ref ""))
-(def set-api-key [key]
+(defn set-api-key [key]
   (dosync (ref-set api-key key)))
 
 (defn- body-to-bytes [resp]
