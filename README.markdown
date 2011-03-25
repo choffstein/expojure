@@ -13,6 +13,7 @@ The currently written dispatch methods are for
 
 * Console Printing
 * getexceptional.com
+* Local file (json-format for later dispatch to getexceptional -- see https://github.com/Greplin/greplin-exception-catcher for design thoughts)
 
 ## Roll Your Own
 To add your own dispatch extensions to the library, simply construct a function that takes an Exception class, and handle it!  You could write it to your logs, a database, or send it by carrier pigeon!
