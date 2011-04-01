@@ -2,7 +2,7 @@
   (:gen-class))
 
 ; Huge thanks to amalloy and brehaut in #clojure (irc.freenode.net) for helping me write
-; these macros
+; these macro
 
 (defmacro try [dispatchers execute-clause & arglist]
   (let [given-catch-clauses (filter (comp #{'catch} first) arglist)
